@@ -1,6 +1,8 @@
 from math import sqrt
 
 
+
+
 class Vector():
     def __init__(self, name, vector_coordinates, pointA, pointB):
         self.name = name
@@ -19,6 +21,7 @@ class Vector():
 
     def magnitude(self):
         return sqrt(self.x1**2 + self.x2**2 + self.x3**2)
+
 
 
 
@@ -94,6 +97,45 @@ def create_point():
 
 
 
+def help():
+        print(" \n"
+              " \n"
+              "Hello Welcome to the help menu \n"
+              "If the command includes {} than there it asks for your specific input. \n"
+              "In any other case its only the command itself\n"
+              "\n"
+              "\n"
+              
+              "BASIC COMMANDS \n"
+              "- exit                                   exit the programm\n"
+              "- help                                   open this help menu\n"          
+              "\n"
+              "\n"
+
+              "POINTS \n"
+              "- point                                  create a new point\n"
+              "- delete point {point_name}              deletes a specific point\n"
+              "- show point {point_name}                gives info about a specific point\n"  
+              "- all points                             gives info about all points\n"
+              "\n"
+              "\n"
+
+              "VECTORS \n"
+              "- vector                                 create a new vector \n"
+              "- delete vector {vector_name}            deletes a specific vector\n"
+              "- show vector {vector_name}              gives info about a specific vector\n"
+              "- all vectors                            gives info about all vectors\n"
+              "- magnitude vector {vector_name}         magnitude of a specific vector\n"
+              "\n"
+              "\n"
+
+              )
+
+
+
+
+
+
 
 #Setup for the programm
 all_points = []
@@ -106,6 +148,9 @@ while True:
 
     if user_input.lower() == "exit":
         exit()
+
+    if user_input.lower() == "help":
+        help()
 
 
     if user_input.lower() == "point":
@@ -151,11 +196,16 @@ while True:
             print(element.name, element.coordinates)
 
 
-    if user_input.startswith("betrag vector "):
-        name = str(user_input[14:])
+    if user_input.startswith("delete vector "):
+        name = str(user_input[13:])
+        for element in all_vectors:
+            if element.name == name:
+                all_vectors.remove(element)
+        print("succesfully deleted")
+
+
+    if user_input.startswith("magnitude vector "):
+        name = str(user_input[17:])
         for element in all_vectors:
             if element.name == name:
                 print(element.magnitude())
-
-
-
