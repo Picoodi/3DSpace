@@ -5,6 +5,9 @@ class Vector():
     def __init__(self, name, vector_coordinates, pointA, pointB):
         self.name = name
         self.coordinates = vector_coordinates
+        self.x1 =  vector_coordinates[0][0]
+        self.x2 = vector_coordinates[1][0]
+        self.x3 = vector_coordinates[2][0]
         self.PointA = pointA
         self.PointB = pointB
 
@@ -12,6 +15,10 @@ class Vector():
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
         print(f"Points: {self.PointA} and {self.PointB}")
+        print(f"Magnitude of {self.magnitude()}")
+
+    def magnitude(self):
+        return sqrt(self.x1**2 + self.x2**2 + self.x3**2)
 
 
 
@@ -96,8 +103,10 @@ all_vectors = []
 while True:
     user_input = input("> ")
 
+
     if user_input.lower() == "exit":
         exit()
+
 
     if user_input.lower() == "point":
         try:
@@ -106,19 +115,20 @@ while True:
             print("Sry thats not a valid input")
 
 
-    if user_input.lower() == "show point":
-        name = input("name of the point = ")
+    if user_input.startswith("show point "):
+        name = str(user_input[11:])
         for element in all_points:
             if element.name == name:
                 element.info()
 
 
-    if user_input.lower() == "delete point":
-        name = input("name of the point = ")
+    if user_input.startswith("delete point "):
+        name = str(user_input[13:])
         for element in all_points:
             if element.name == name:
                 all_points.remove(element)
         print("succesfully deleted")
+
 
     if user_input.lower() == "all points":
         for element in all_points:
@@ -128,14 +138,24 @@ while True:
     if user_input.lower() == "vector":
         create_vector()
 
-    if user_input.lower() == "show vector":
-        name = input("name of the vector = ")
+
+    if user_input.startswith("show vector "):
+        name = str(user_input[12:])
         for element in all_vectors:
             if element.name == name:
                 element.info()
 
+
     if user_input.lower() == "all vectors":
         for element in all_vectors:
             print(element.name, element.coordinates)
+
+
+    if user_input.startswith("betrag vector "):
+        name = str(user_input[14:])
+        for element in all_vectors:
+            if element.name == name:
+                print(element.magnitude())
+
 
 
