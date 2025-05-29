@@ -3,13 +3,13 @@ from math import sqrt
 
 
 
-class Vector():
+class Vector:
     def __init__(self, name, vector_coordinates, pointA, pointB):
         self.name = name
         self.coordinates = vector_coordinates
-        self.x1 =  vector_coordinates[0][0]
-        self.x2 = vector_coordinates[1][0]
-        self.x3 = vector_coordinates[2][0]
+        self.x =  vector_coordinates[0][0]
+        self.y = vector_coordinates[1][0]
+        self.z = vector_coordinates[2][0]
         self.PointA = pointA
         self.PointB = pointB
 
@@ -20,16 +20,19 @@ class Vector():
         print(f"Magnitude of {self.magnitude()}")
 
     def magnitude(self):
-        return sqrt(self.x1**2 + self.x2**2 + self.x3**2)
+        return sqrt(self.x**2 + self.y**2 + self.z**2)
 
 
 
 
 
-class Point():
+class Point:
     def __init__(self, name, list_of_coordinates):
         self.name = name
         self.coordinates = list_of_coordinates
+        self.x = list_of_coordinates[0][0]
+        self.y = list_of_coordinates[1][0]
+        self.z = list_of_coordinates[2][0]
 
 
     def info (self):
@@ -83,16 +86,65 @@ def create_vector():
 
 def create_point():
     name = input("name = ")
-    x1 = int(input("x1 = "))
-    x2 = int(input("x2 = "))
-    x3 = int(input("x3 = "))
-    list_of_coordinates = [[x1],
-                           [x2],
-                           [x3]]
+    x = int(input("x1 = "))
+    y = int(input("x2 = "))
+    z = int(input("x3 = "))
+    list_of_coordinates = [[x],
+                           [y],
+                           [z]]
 
     print(f"Point {name} with the coordinates {list_of_coordinates} got created successfully.")
     name = Point(name, list_of_coordinates)
     all_points.append(name)
+
+
+
+
+def mirror_point(plane):
+    list_of_coordinates = []
+    new_coordinates = []
+    new_name = input("Name of the new point: ")
+    name = input("Which point you want to mirror: ")
+    for element in all_points:
+        if element.name == name:
+            list_of_coordinates = element.coordinates
+
+
+
+
+    if plane == "o":
+        new_coordinates = [[list_of_coordinates[0][0] *-1],
+                           [list_of_coordinates[1][0] *-1],
+                           [list_of_coordinates[2][0] *-1]]
+        new_name = Point(new_name, new_coordinates)
+
+    elif plane == "xy":
+        new_coordinates = [[list_of_coordinates[0][0]],
+                           [list_of_coordinates[1][0]],
+                           [list_of_coordinates[2][0] * -1]]
+        new_name = Point(new_name, new_coordinates)
+
+    elif plane == "xz":
+        new_coordinates = [[list_of_coordinates[0][0]],
+                           [list_of_coordinates[1][0] * -1],
+                           [list_of_coordinates[2][0] ]]
+        new_name = Point(new_name, new_coordinates)
+
+    elif plane == "yz":
+        new_coordinates = [[list_of_coordinates[0][0] * -1],
+                           [list_of_coordinates[1][0]],
+                           [list_of_coordinates[2][0]]]
+        new_name = Point(new_name, new_coordinates)
+
+    else:
+        print("Sry your plane to mirror is not defined. See the help page for more infos.")
+        return 1
+
+
+    print(f"Point {new_name.name} with the coordinates {new_coordinates} got created successfully.")
+    all_points.append(new_name)
+
+
 
 
 
@@ -117,7 +169,8 @@ def help():
               "- delete point {point_name}              deletes a specific point\n"
               "- show point {point_name}                gives info about a specific point\n"  
               "- all points                             gives info about all points\n"
-              "\n"
+              "- mirror point {plane}                   mirror a point on the given plane\n"
+              "                                         possible planes are o,xy,xz,yz\n"
               "\n"
 
               "VECTORS \n"
@@ -135,12 +188,24 @@ def help():
 
 
 
+####################START OF THE PROGRAMM########
 
-
-#Setup for the programm
+#Setup lists for the programm
 all_points = []
 all_vectors = []
 
+
+#Saying hello to the user
+#Explaining how the axis are named
+print("Hello there. If you need help with the programm just type help \n"
+      "The coordinates are\n"
+      "     z\n"
+      "     |\n"
+      "     |\n"
+      "     +------ y\n"
+      "    /\n"
+      "   x\n"
+      )
 
 while True:
     user_input = input("> ")
@@ -172,12 +237,22 @@ while True:
         for element in all_points:
             if element.name == name:
                 all_points.remove(element)
-        print("succesfully deleted")
+        print("successfully deleted")
 
 
     if user_input.lower() == "all points":
         for element in all_points:
             print(element.name, element.coordinates)
+
+
+    if user_input.startswith("mirror point "):
+        plane = str(user_input[13:])
+        mirror_point(plane)
+
+
+
+
+
 
 
     if user_input.lower() == "vector":
@@ -201,7 +276,7 @@ while True:
         for element in all_vectors:
             if element.name == name:
                 all_vectors.remove(element)
-        print("succesfully deleted")
+        print("successfully deleted")
 
 
     if user_input.startswith("magnitude vector "):
