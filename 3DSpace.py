@@ -29,7 +29,12 @@ class Vector:
         self.y *= scalar
         self.z *= scalar
 
-
+    def negative(self):
+        name = "-" + self.name
+        new_coordinates = [[self.x * -1],[self.y * -1],[self.z * -1]]
+        print(f"Vector {name} with coordinates {new_coordinates} got created successfully.")
+        name = Vector(name, new_coordinates, self.PointB, self.PointA)
+        all_vectors.append(name)
 
 
 
@@ -175,6 +180,7 @@ def add_vectors():
 
 
 
+
 def help():
         print(" \n"
               " \n"
@@ -205,6 +211,8 @@ def help():
               "- show vector {vector_name}              gives info about a specific vector\n"
               "- all vectors                            gives info about all vectors\n"
               "- magnitude vector {vector_name}         magnitude of a specific vector\n"
+              "- add vectors                            lets you add two given vectors\n"
+              "- negative vector {vector_name}          creates the negative vector of the given one\n"
               "\n"
               "\n"
 
@@ -314,3 +322,10 @@ while True:
 
     if user_input.lower() == "add vectors":
         add_vectors()
+
+
+    if user_input.startswith("negative vector "):
+        name = str(user_input[16:])
+        for element in all_vectors:
+            if element.name.strip().lower() == name.strip().lower():
+                element.negative()
