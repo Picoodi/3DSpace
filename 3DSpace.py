@@ -1,34 +1,49 @@
+# This is the python script for my 3DSpace programm
+# It is a mathematical application for the geometry in 3D Space
+# If you do it right it also works for 2D Space
+# I will comment the rest of the code as well to make the script understandable
+# In the programm you can type help and all commands with explanation will be
+# shown to the user in the same window.
+# The coordinates are shown in [[x],[y],[z]] because with this matrix multiplication
+# can be implemented easily as well.
+
+#the necessary libraries for the project
 from math import sqrt
 
 
 
 
+# The vector is one of the basic building blocks of geometry
 class Vector:
+    # We need all those parameters for mathematics or finding and working with the object
     def __init__(self, name, vector_coordinates, pointA, pointB):
         self.name = name
-        self.coordinates = vector_coordinates
+        self.coordinates = vector_coordinates #Vektior = (x,y,z) as a matrix of course
         self.x =  vector_coordinates[0][0]
         self.y = vector_coordinates[1][0]
         self.z = vector_coordinates[2][0]
         self.PointA = pointA
         self.PointB = pointB
 
+    #This function prints all the information about the vector
     def info (self):
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
         print(f"Points: {self.PointA} and {self.PointB}")
         print(f"Magnitude of {self.magnitude()}")
 
+    # returns the magnitude of the vector calculated with the 3D Pythagoras
     def magnitude(self):
         return sqrt(self.x**2 + self.y**2 + self.z**2)
 
-
+    # Lets you multiply the vector with a number aka scalar, the new values are stored
     def scalar_multiplication(self, scalar):
         self.coordinates = [[self.x * scalar],[self.y * scalar],[self.z * scalar]]
         self.x *= scalar
         self.y *= scalar
         self.z *= scalar
 
+    # creates a new Vector which is the negative vector of the given object
     def negative(self):
         name = "-" + self.name
         new_coordinates = [[self.x * -1],[self.y * -1],[self.z * -1]]
@@ -38,7 +53,11 @@ class Vector:
 
 
 
+
+
+# The Point in a 3D Space P = (x,y,z)
 class Point:
+    # We need all those parameters for mathematics or finding and working with the object
     def __init__(self, name, list_of_coordinates):
         self.name = name
         self.coordinates = list_of_coordinates
@@ -46,7 +65,7 @@ class Point:
         self.y = list_of_coordinates[1][0]
         self.z = list_of_coordinates[2][0]
 
-
+    # This function prints all the information about the point
     def info (self):
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
@@ -54,7 +73,7 @@ class Point:
 
 
 
-
+# creates a vector with two given points
 def create_vector(name, pointA, pointB):
 
     pointA_exists = False
@@ -62,6 +81,8 @@ def create_vector(name, pointA, pointB):
     pointA_coordinates = []
     pointB_coordinates = []
 
+    # we go through the list all_points to get the coordinates
+    # of the given points
     for element in all_points:
         if element.name == pointA:
             pointA_coordinates = element.coordinates
@@ -72,13 +93,14 @@ def create_vector(name, pointA, pointB):
             pointB_exists = True
 
 
-    if pointA_exists and pointB_exists == True:
+    if pointA_exists and pointB_exists == True: #if the points don't exist we give back a fail
+        #creaing the mathematical vector
         vector_coordinates = [[pointB_coordinates[0][0] - pointA_coordinates[0][0]],
                               [pointB_coordinates[1][0] - pointA_coordinates[1][0]],
                               [pointB_coordinates[2][0] - pointA_coordinates[2][0]]
                               ]
 
-
+        #creating a successful message and creating the vector object and adding it to the all_vectors list
         print(f"Vector {name} with coordinates {vector_coordinates} got created successfully.")
         name = Vector(name, vector_coordinates, pointA, pointB)
         all_vectors.append(name)
@@ -92,26 +114,31 @@ def create_vector(name, pointA, pointB):
 
 
 def create_point(name, x,y,z):
+    #just putting the input into the right list format
     list_of_coordinates = [[x],
                            [y],
                            [z]]
 
+    # creating a successful message and creating the point object and adding it to the all_points list
     print(f"Point {name} with the coordinates {list_of_coordinates} got created successfully.")
     name = Point(name, list_of_coordinates)
     all_points.append(name)
 
 
 
-
+# TODO not jet finished the mirror function. Point and axis mirroring still need to be implemented
 def mirror_point(plane, new_name, name):
+    # plane where the point will be mirrored can be o aka origin , xy, xz, yz
     list_of_coordinates = []
     new_coordinates = []
 
+    # We need the original coordinates of the point from the all_points list
     for element in all_points:
         if element.name == name:
             list_of_coordinates = element.coordinates
 
 
+    # we check which plane it is and change the coordinates accordingly
     if plane == "o":
         new_coordinates = [[list_of_coordinates[0][0] *-1],
                            [list_of_coordinates[1][0] *-1],
@@ -136,11 +163,12 @@ def mirror_point(plane, new_name, name):
                            [list_of_coordinates[2][0]]]
         new_name = Point(new_name, new_coordinates)
 
+    #If the input of the plane ist not right we give that back to the user and break the function with None return
     else:
         print("Sry your plane to mirror is not defined. See the help page for more infos.")
         return None
 
-
+    #If everything worked we create a new Point object and add it to all_points list
     print(f"Point {new_name.name} with the coordinates {new_coordinates} got created successfully.")
     all_points.append(new_name)
 
@@ -148,22 +176,24 @@ def mirror_point(plane, new_name, name):
 
 
 def add_vectors(VectorA, VectorB, new_name):
-
+    #we take two vectors and try to add them together
     try:
          new_coordinates =[[VectorA.x + VectorB.x],
                            [VectorA.y + VectorB.y],
                            [VectorA.z + VectorB.z]]
 
+         # if everything works fine we send a successful message create a new Vector object and add it to all_vectors list
          print(f"Vector {new_name} with coordinates {new_coordinates} got created successfully.")
          new_name = Vector(new_name, new_coordinates, None, None)
          all_vectors.append(name)
 
+    #if something went wrong we tell it the user
     except:
         print("There has been a problem with the Vectors of yours")
 
 
 
-
+# The help page shows every command and an explanation for each one
 def help():
         print(" \n"
               " \n"
@@ -206,7 +236,7 @@ def help():
 
 ####################START OF THE PROGRAMM########
 
-#Setup lists for the programm
+#Setup lists for the programm that are ESSENTIAL
 all_points = []
 all_vectors = []
 
@@ -223,8 +253,14 @@ print("Hello there. If you need help with the programm just type help \n"
       "   x\n"
       )
 
+#Having the while loop as the start
 while True:
     user_input = input("> ")
+
+    #for the rest its always if statements which command the user typed
+    #and we use more input() functions to get the necessary information
+    # to call the corresponding function
+    # we also search the all_points and all_vectors lists to get information
 
     if user_input.lower() == "exit":
         exit()
