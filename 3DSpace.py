@@ -55,11 +55,7 @@ class Point:
 
 
 
-def create_vector():
-    name = input("Name of the vector: ")
-    pointA = input("Starting Point: ")
-    pointB = input("End Point: ")
-
+def create_vector(name, pointA, pointB):
 
     pointA_exists = False
     pointB_exists = False
@@ -95,11 +91,7 @@ def create_vector():
 
 
 
-def create_point():
-    name = input("name = ")
-    x = float(input("x1 = "))
-    y = float(input("x2 = "))
-    z = float(input("x3 = "))
+def create_point(name, x,y,z):
     list_of_coordinates = [[x],
                            [y],
                            [z]]
@@ -111,11 +103,10 @@ def create_point():
 
 
 
-def mirror_point(plane):
+def mirror_point(plane, new_name, name):
     list_of_coordinates = []
     new_coordinates = []
-    new_name = input("Name of the new point: ")
-    name = input("Which point you want to mirror: ")
+
     for element in all_points:
         if element.name == name:
             list_of_coordinates = element.coordinates
@@ -147,7 +138,7 @@ def mirror_point(plane):
 
     else:
         print("Sry your plane to mirror is not defined. See the help page for more infos.")
-        return 1
+        return None
 
 
     print(f"Point {new_name.name} with the coordinates {new_coordinates} got created successfully.")
@@ -156,23 +147,15 @@ def mirror_point(plane):
 
 
 
-def add_vectors():
-    name = input("New vector name: ")
-    VectorA = input("First vector: ")
-    VectorB = input("Second vector: ")
-    for element in all_vectors:
-        if element.name == VectorA:
-            VectorA = element
-        if element.name == VectorB:
-            VectorB = element
+def add_vectors(VectorA, VectorB, new_name):
 
     try:
          new_coordinates =[[VectorA.x + VectorB.x],
                            [VectorA.y + VectorB.y],
                            [VectorA.z + VectorB.z]]
 
-         print(f"Vector {name} with coordinates {new_coordinates} got created successfully.")
-         name = Vector(name, new_coordinates, None, None)
+         print(f"Vector {new_name} with coordinates {new_coordinates} got created successfully.")
+         new_name = Vector(new_name, new_coordinates, None, None)
          all_vectors.append(name)
 
     except:
@@ -185,8 +168,6 @@ def help():
         print(" \n"
               " \n"
               "Hello Welcome to the help menu \n"
-              "If the command includes {} than there it asks for your specific input. \n"
-              "In any other case its only the command itself\n"
               "\n"
               "\n"
               
@@ -198,21 +179,22 @@ def help():
 
               "POINTS \n"
               "- point                                  create a new point\n"
-              "- delete point {point_name}              deletes a specific point\n"
-              "- show point {point_name}                gives info about a specific point\n"  
+              "- delete point                           deletes a specific point\n"
+              "- show point                             gives info about a specific point\n"  
               "- all points                             gives info about all points\n"
-              "- mirror point {plane}                   mirror a point on the given plane\n"
+              "- mirror point                           mirror a point on the given plane\n"
               "                                         possible planes are o,xy,xz,yz\n"
               "\n"
 
               "VECTORS \n"
               "- vector                                 create a new vector \n"
-              "- delete vector {vector_name}            deletes a specific vector\n"
-              "- show vector {vector_name}              gives info about a specific vector\n"
+              "- delete vector                          deletes a specific vector\n"
+              "- show vector                            gives info about a specific vector\n"
               "- all vectors                            gives info about all vectors\n"
-              "- magnitude vector {vector_name}         magnitude of a specific vector\n"
+              "- magnitude vector                       magnitude of a specific vector\n"
               "- add vectors                            lets you add two given vectors\n"
-              "- negative vector {vector_name}          creates the negative vector of the given one\n"
+              "- negative vector                        creates the negative vector of the given one\n"
+              "- multiply vector                        skalar multiplication of 1 vector\n"
               "\n"
               "\n"
 
@@ -244,7 +226,6 @@ print("Hello there. If you need help with the programm just type help \n"
 while True:
     user_input = input("> ")
 
-
     if user_input.lower() == "exit":
         exit()
 
@@ -254,20 +235,24 @@ while True:
 
     if user_input.lower() == "point":
         try:
-            create_point()
+            name = input("name = ")
+            x = float(input("x = "))
+            y = float(input("y = "))
+            z = float(input("z = "))
+            create_point(name, x, y, z)
         except:
-            print("Sry thats not a valid input")
+            print("There has been a problem with your input")
 
 
-    if user_input.startswith("show point "):
-        name = str(user_input[11:])
+    if user_input.lower() == "show point":
+        name = input("Name of the point: ")
         for element in all_points:
             if element.name.strip().lower() == name.strip().lower():
                 element.info()
 
 
-    if user_input.startswith("delete point "):
-        name = str(user_input[13:])
+    if user_input.lower() == "delete point":
+        name = input("Name of the point: ")
         for element in all_points:
             if element.name.strip().lower() == name.strip().lower():
                 all_points.remove(element)
@@ -279,22 +264,28 @@ while True:
             print(element.name, element.coordinates)
 
 
-    if user_input.startswith("mirror point "):
-        plane = str(user_input[13:])
-        mirror_point(plane)
-
-
-
-
-
+    if user_input.lower() == "mirror point":
+        plane = input("With which plane / point / axis wo mirror: ")
+        new_name = input("Name of the new point: ")
+        name = input("Which point you want to mirror: ")
+        try:
+            mirror_point(plane, new_name,name)
+        except:
+            print("There has been a problem with your input")
 
 
     if user_input.lower() == "vector":
-        create_vector()
+        try:
+            name = input("Name of the vector: ")
+            pointA = input("Starting Point: ")
+            pointB = input("End Point: ")
+            create_vector(name, pointA, pointB)
+        except:
+            print("There has been a problem with your input")
 
 
-    if user_input.startswith("show vector "):
-        name = str(user_input[12:])
+    if user_input.lower() == "show vector":
+        name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 element.info()
@@ -305,27 +296,45 @@ while True:
             print(element.name, element.coordinates)
 
 
-    if user_input.startswith("delete vector "):
-        name = str(user_input[13:])
+    if user_input.lower() == "delete vector":
+        name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 all_vectors.remove(element)
                 print("successfully deleted")
 
 
-    if user_input.startswith("magnitude vector "):
-        name = str(user_input[17:])
+    if user_input.lower() == "magnitude vector":
+        name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 print(element.magnitude())
 
 
     if user_input.lower() == "add vectors":
-        add_vectors()
+        new_name = input("New vector name: ")
+        VectorA = input("First vector: ")
+        VectorB = input("Second vector: ")
+
+        for element in all_vectors:
+            if element.name == VectorA:
+                VectorA = element
+            if element.name == VectorB:
+                VectorB = element
+
+        add_vectors(VectorA, VectorB, new_name)
 
 
-    if user_input.startswith("negative vector "):
-        name = str(user_input[16:])
+    if user_input.lower() == "negative vector":
+        name =  input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 element.negative()
+
+
+    if user_input.lower() == "multiply vector":
+        vector = input("vector name: ")
+        number = float(input("multiplied by: "))
+        for element in all_vectors:
+            if element.name == vector:
+                element.scalar_multiplication(number)
