@@ -126,7 +126,7 @@ def create_point(name, x,y,z):
 
 
 
-# TODO not jet finished the mirror function. Point and axis mirroring still need to be implemented
+# not jet finished the mirror function. Point and axis mirroring still need to be implemented
 def mirror_point(plane, new_name, name):
     # plane where the point will be mirrored can be o aka origin , xy, xz, yz
     list_of_coordinates = []
