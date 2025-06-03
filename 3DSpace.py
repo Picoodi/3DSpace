@@ -45,11 +45,10 @@ class Vector:
 
     # creates a new Vector which is the negative vector of the given object
     def negative(self):
-        name = "-" + self.name
+        new_name = input("Name of the negative: ")
         new_coordinates = [[self.x * -1],[self.y * -1],[self.z * -1]]
-        print(f"Vector {name} with coordinates {new_coordinates} got created successfully.")
-        name = Vector(name, new_coordinates, self.PointB, self.PointA)
-        all_vectors.append(name)
+        print(f"Vector {new_name} with coordinates {new_coordinates} got created successfully.")
+        all_vectors.append(Vector(new_name, new_coordinates, self.PointB, self.PointA))
 
 
 
@@ -102,8 +101,7 @@ def create_vector(name, pointA, pointB):
 
         #creating a successful message and creating the vector object and adding it to the all_vectors list
         print(f"Vector {name} with coordinates {vector_coordinates} got created successfully.")
-        name = Vector(name, vector_coordinates, pointA, pointB)
-        all_vectors.append(name)
+        all_vectors.append(Vector(name, vector_coordinates, pointA, pointB))
 
 
     else:
@@ -121,20 +119,19 @@ def create_point(name, x,y,z):
 
     # creating a successful message and creating the point object and adding it to the all_points list
     print(f"Point {name} with the coordinates {list_of_coordinates} got created successfully.")
-    name = Point(name, list_of_coordinates)
-    all_points.append(name)
+    all_points.append(Point(name, list_of_coordinates))
 
 
 
 # not jet finished the mirror function. Point and axis mirroring still need to be implemented
-def mirror_point(plane, new_name, name):
+def mirror_point(plane, new_name, point_name):
     # plane where the point will be mirrored can be o aka origin , xy, xz, yz
     list_of_coordinates = []
     new_coordinates = []
 
     # We need the original coordinates of the point from the all_points list
     for element in all_points:
-        if element.name == name:
+        if element.name == point_name:
             list_of_coordinates = element.coordinates
 
 
@@ -143,25 +140,26 @@ def mirror_point(plane, new_name, name):
         new_coordinates = [[list_of_coordinates[0][0] *-1],
                            [list_of_coordinates[1][0] *-1],
                            [list_of_coordinates[2][0] *-1]]
-        new_name = Point(new_name, new_coordinates)
+        new_point = Point(new_name, new_coordinates)
 
     elif plane == "xy":
         new_coordinates = [[list_of_coordinates[0][0]],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0] * -1]]
-        new_name = Point(new_name, new_coordinates)
+        new_point = Point(new_name, new_coordinates)
 
     elif plane == "xz":
         new_coordinates = [[list_of_coordinates[0][0]],
                            [list_of_coordinates[1][0] * -1],
                            [list_of_coordinates[2][0] ]]
-        new_name = Point(new_name, new_coordinates)
+        new_point = Point(new_name, new_coordinates)
 
     elif plane == "yz":
         new_coordinates = [[list_of_coordinates[0][0] * -1],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0]]]
-        new_name = Point(new_name, new_coordinates)
+        new_point = Point(new_name, new_coordinates)
+
 
     #If the input of the plane ist not right we give that back to the user and break the function with None return
     else:
@@ -170,7 +168,7 @@ def mirror_point(plane, new_name, name):
 
     #If everything worked we create a new Point object and add it to all_points list
     print(f"Point {new_name.name} with the coordinates {new_coordinates} got created successfully.")
-    all_points.append(new_name)
+    all_points.append(new_point)
 
 
 
@@ -182,10 +180,7 @@ def add_vectors(VectorA, VectorB, new_name):
                            [VectorA.y + VectorB.y],
                            [VectorA.z + VectorB.z]]
 
-         # if everything works fine we send a successful message create a new Vector object and add it to all_vectors list
-         print(f"Vector {new_name} with coordinates {new_coordinates} got created successfully.")
-         new_name = Vector(new_name, new_coordinates, None, None)
-         all_vectors.append(name)
+         all_vectors.append(Vector(new_name, new_coordinates, None, None))
 
     #if something went wrong we tell it the user
     except:
@@ -237,6 +232,9 @@ def help():
 ####################START OF THE PROGRAMM########
 
 #Setup lists for the programm that are ESSENTIAL
+#We store every Object inside those lists
+#All Objects will have a name with which we will find
+#the objects the user needs
 all_points = []
 all_vectors = []
 
@@ -265,11 +263,11 @@ while True:
     if user_input.lower() == "exit":
         exit()
 
-    if user_input.lower() == "help":
+    elif user_input.lower() == "help":
         help()
 
 
-    if user_input.lower() == "point":
+    elif user_input.lower() == "point":
         try:
             name = input("name = ")
             x = float(input("x = "))
@@ -280,37 +278,37 @@ while True:
             print("There has been a problem with your input")
 
 
-    if user_input.lower() == "show point":
+    elif user_input.lower() == "show point":
         name = input("Name of the point: ")
         for element in all_points:
-            if element.name.strip().lower() == name.strip().lower():
+            if element.name.lower() == name.lower():
                 element.info()
 
 
-    if user_input.lower() == "delete point":
+    elif user_input.lower() == "delete point":
         name = input("Name of the point: ")
         for element in all_points:
-            if element.name.strip().lower() == name.strip().lower():
+            if element.name.lower() == name.lower():
                 all_points.remove(element)
                 print("successfully deleted")
 
 
-    if user_input.lower() == "all points":
+    elif user_input.lower() == "all points":
         for element in all_points:
             print(element.name, element.coordinates)
 
 
-    if user_input.lower() == "mirror point":
+    elif user_input.lower() == "mirror point":
         plane = input("With which plane / point / axis wo mirror: ")
         new_name = input("Name of the new point: ")
         name = input("Which point you want to mirror: ")
         try:
-            mirror_point(plane, new_name,name)
+            mirror_point(plane, new_name, name)
         except:
             print("There has been a problem with your input")
 
 
-    if user_input.lower() == "vector":
+    elif user_input.lower() == "vector":
         try:
             name = input("Name of the vector: ")
             pointA = input("Starting Point: ")
@@ -320,19 +318,19 @@ while True:
             print("There has been a problem with your input")
 
 
-    if user_input.lower() == "show vector":
+    elif user_input.lower() == "show vector":
         name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 element.info()
 
 
-    if user_input.lower() == "all vectors":
+    elif user_input.lower() == "all vectors":
         for element in all_vectors:
             print(element.name, element.coordinates)
 
 
-    if user_input.lower() == "delete vector":
+    elif user_input.lower() == "delete vector":
         name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
@@ -340,14 +338,14 @@ while True:
                 print("successfully deleted")
 
 
-    if user_input.lower() == "magnitude vector":
+    elif user_input.lower() == "magnitude vector":
         name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 print(element.magnitude())
 
 
-    if user_input.lower() == "add vectors":
+    elif user_input.lower() == "add vectors":
         new_name = input("New vector name: ")
         VectorA = input("First vector: ")
         VectorB = input("Second vector: ")
@@ -361,14 +359,14 @@ while True:
         add_vectors(VectorA, VectorB, new_name)
 
 
-    if user_input.lower() == "negative vector":
+    elif user_input.lower() == "negative vector":
         name =  input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 element.negative()
 
 
-    if user_input.lower() == "multiply vector":
+    elif user_input.lower() == "multiply vector":
         vector = input("vector name: ")
         number = float(input("multiplied by: "))
         for element in all_vectors:
