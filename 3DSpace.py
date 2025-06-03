@@ -167,7 +167,7 @@ def mirror_point(plane, new_name, point_name):
         return None
 
     #If everything worked we create a new Point object and add it to all_points list
-    print(f"Point {new_name.name} with the coordinates {new_coordinates} got created successfully.")
+    print(f"Point {new_name} with the coordinates {new_coordinates} got created successfully.")
     all_points.append(new_point)
 
 
@@ -181,10 +181,12 @@ def add_vectors(VectorA, VectorB, new_name):
                            [VectorA.z + VectorB.z]]
 
          all_vectors.append(Vector(new_name, new_coordinates, None, None))
+         print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
+
 
     #if something went wrong we tell it the user
     except:
-        print("There has been a problem with the Vectors of yours")
+        print("There has been a problem with the Vectors of yours.")
 
 
 
@@ -275,7 +277,7 @@ while True:
             z = float(input("z = "))
             create_point(name, x, y, z)
         except:
-            print("There has been a problem with your input")
+            print("There has been a problem with your input.")
 
 
     elif user_input.lower() == "show point":
@@ -305,7 +307,7 @@ while True:
         try:
             mirror_point(plane, new_name, name)
         except:
-            print("There has been a problem with your input")
+            print("There has been a problem with your input.")
 
 
     elif user_input.lower() == "vector":
@@ -315,7 +317,7 @@ while True:
             pointB = input("End Point: ")
             create_vector(name, pointA, pointB)
         except:
-            print("There has been a problem with your input")
+            print("There has been a problem with your input.")
 
 
     elif user_input.lower() == "show vector":
