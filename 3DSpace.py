@@ -137,31 +137,36 @@ def mirror_point(plane, new_name, point_name):
 
 
     # we check which plane it is and change the coordinates accordingly
-    if plane == "o":
+    if plane == "o": #Every coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0] *-1],
                            [list_of_coordinates[1][0] *-1],
                            [list_of_coordinates[2][0] *-1]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "xy":
+    elif plane == "xy": #the z coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0]],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0] * -1]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "xz":
+    elif plane == "xz": #the y coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0]],
                            [list_of_coordinates[1][0] * -1],
                            [list_of_coordinates[2][0] ]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "yz":
+    elif plane == "yz": #the x coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0] * -1],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0]]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "x":
+
+    #For the next planes, geometrically we create a vector to the point we want
+    #to mirror through. We double its magnitude and calculate the new_coordinates
+    #of the new point with the original point plus the vector.
+
+    elif plane == "x": #Point on x-Axis is (x from point /0/0)
         mirror_vector_coordinates = [[2 * (list_of_coordinates[0][0] - list_of_coordinates[0][0])],
                                      [2 * (0 - list_of_coordinates[1][0])],
                                      [2 * (0 - list_of_coordinates[2][0])]
@@ -172,11 +177,10 @@ def mirror_point(plane, new_name, point_name):
                            [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
                            ]
 
-        print(new_coordinates)
         new_point = Point(new_name, new_coordinates)
 
 
-    elif plane == "y":
+    elif plane == "y": #Point on x-Axis is (0/y from point /0)
         mirror_vector_coordinates = [[2 * (0 - list_of_coordinates[0][0])],
                                      [2 * (list_of_coordinates[1][0] - list_of_coordinates[1][0])],
                                      [2 * (0 - list_of_coordinates[2][0])]
@@ -187,11 +191,10 @@ def mirror_point(plane, new_name, point_name):
                            [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
                            ]
 
-        print(new_coordinates)
         new_point = Point(new_name, new_coordinates)
 
 
-    elif plane == "z":
+    elif plane == "z": #Point on x-Axis is (0/0/z from point)
         mirror_vector_coordinates = [[2 * (0 - list_of_coordinates[0][0])],
                                      [2 * (0 - list_of_coordinates[1][0])],
                                      [2 * (list_of_coordinates[2][0] - list_of_coordinates[2][0])]
@@ -202,11 +205,11 @@ def mirror_point(plane, new_name, point_name):
                            [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
                            ]
 
-        print(new_coordinates)
         new_point = Point(new_name, new_coordinates)
 
 
-    elif plane == "point":
+
+    elif plane == "point": #Here we create the vetor between the two points, double and create the new point
         mirror_point = input("Mirror point: ")
         mirror_point_coordinates = []
         for element in all_points:
@@ -276,7 +279,8 @@ def help():
               "- show point                             gives info about a specific point\n"  
               "- all points                             gives info about all points\n"
               "- mirror point                           mirror a point on the given plane\n"
-              "                                         possible planes are o,xy,xz,yz\n"
+              "                                         possible planes are o, x, y, z ,xy, xz ,yz, point\n"
+              "\n"
               "\n"
 
               "VECTORS \n"
