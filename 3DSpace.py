@@ -123,6 +123,7 @@ def create_point(name, x,y,z):
 
 
 
+
 # not jet finished the mirror function. Point and axis mirroring still need to be implemented
 def mirror_point(plane, new_name, point_name):
     # plane where the point will be mirrored can be o aka origin , xy, xz, yz
@@ -158,6 +159,28 @@ def mirror_point(plane, new_name, point_name):
         new_coordinates = [[list_of_coordinates[0][0] * -1],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0]]]
+        new_point = Point(new_name, new_coordinates)
+
+
+
+    elif plane == "point":
+        mirror_point = input("Mirror point: ")
+        mirror_point_coordinates = []
+        for element in all_points:
+            if element.name == mirror_point:
+                mirror_point_coordinates = element.coordinates
+
+        mirror_vector_coordinates = [[ 2*( mirror_point_coordinates[0][0] - list_of_coordinates[0][0]) ],
+                                     [ 2*( mirror_point_coordinates[1][0] - list_of_coordinates[1][0]) ],
+                                     [ 2*( mirror_point_coordinates[2][0] - list_of_coordinates[2][0]) ]
+                                     ]
+
+        new_coordinates = [[list_of_coordinates[0][0] + mirror_vector_coordinates[0][0]],
+                           [list_of_coordinates[1][0] + mirror_vector_coordinates[1][0]],
+                           [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
+                           ]
+
+        print(new_coordinates)
         new_point = Point(new_name, new_coordinates)
 
 
