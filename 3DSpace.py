@@ -161,6 +161,49 @@ def mirror_point(plane, new_name, point_name):
                            [list_of_coordinates[2][0]]]
         new_point = Point(new_name, new_coordinates)
 
+    elif plane == "x":
+        mirror_vector_coordinates = [[2 * (list_of_coordinates[0][0] - list_of_coordinates[0][0])],
+                                     [2 * (0 - list_of_coordinates[1][0])],
+                                     [2 * (0 - list_of_coordinates[2][0])]
+                                     ]
+
+        new_coordinates = [[list_of_coordinates[0][0] + mirror_vector_coordinates[0][0]],
+                           [list_of_coordinates[1][0] + mirror_vector_coordinates[1][0]],
+                           [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
+                           ]
+
+        print(new_coordinates)
+        new_point = Point(new_name, new_coordinates)
+
+
+    elif plane == "y":
+        mirror_vector_coordinates = [[2 * (0 - list_of_coordinates[0][0])],
+                                     [2 * (list_of_coordinates[1][0] - list_of_coordinates[1][0])],
+                                     [2 * (0 - list_of_coordinates[2][0])]
+                                     ]
+
+        new_coordinates = [[list_of_coordinates[0][0] + mirror_vector_coordinates[0][0]],
+                           [list_of_coordinates[1][0] + mirror_vector_coordinates[1][0]],
+                           [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
+                           ]
+
+        print(new_coordinates)
+        new_point = Point(new_name, new_coordinates)
+
+
+    elif plane == "z":
+        mirror_vector_coordinates = [[2 * (0 - list_of_coordinates[0][0])],
+                                     [2 * (0 - list_of_coordinates[1][0])],
+                                     [2 * (list_of_coordinates[2][0] - list_of_coordinates[2][0])]
+                                     ]
+
+        new_coordinates = [[list_of_coordinates[0][0] + mirror_vector_coordinates[0][0]],
+                           [list_of_coordinates[1][0] + mirror_vector_coordinates[1][0]],
+                           [list_of_coordinates[2][0] + mirror_vector_coordinates[2][0]]
+                           ]
+
+        print(new_coordinates)
+        new_point = Point(new_name, new_coordinates)
 
 
     elif plane == "point":
