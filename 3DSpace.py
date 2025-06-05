@@ -258,6 +258,19 @@ def add_vectors(VectorA, VectorB, new_name):
         print("There has been a problem with the Vectors of yours.")
 
 
+def subtract_vectors(VectorA, VectorB, new_name):
+    try:
+        new_coordinates = [[VectorA.x - VectorB.x ],
+                           [VectorA.y - VectorB.y ],
+                           [VectorA.z - VectorB.z ]]
+
+        all_vectors.append(Vector(new_name, new_coordinates, None, None))
+        print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
+
+    except:
+        print("There has been a problem with the Vectors of yours.")
+
+
 
 # The help page shows every command and an explanation for each one
 def help():
@@ -289,7 +302,8 @@ def help():
               "- show vector                            gives info about a specific vector\n"
               "- all vectors                            gives info about all vectors\n"
               "- magnitude vector                       magnitude of a specific vector\n"
-              "- add vectors                            lets you add two given vectors\n"
+              "- add vectors                            add two given vectors\n"
+              "- subtract vectors                       subtract two given vectors\n"
               "- negative vector                        creates the negative vector of the given one\n"
               "- multiply vector                        skalar multiplication of 1 vector\n"
               "\n"
@@ -429,6 +443,19 @@ while True:
                 VectorB = element
 
         add_vectors(VectorA, VectorB, new_name)
+
+    elif user_input.lower() == "subtract vectors":
+        new_name = input("New vector name: ")
+        VectorA = input("First vector: ")
+        VectorB = input("Second vector: ")
+
+        for element in all_vectors:
+            if element.name == VectorA:
+                VectorA = element
+            if element.name == VectorB:
+                VectorB = element
+
+        subtract_vectors(VectorA, VectorB, new_name)
 
 
     elif user_input.lower() == "negative vector":
