@@ -69,6 +69,14 @@ class Point:
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
 
+    def position_vector(self):
+        # creating a successful message and creating the vector object and adding it to the all_vectors list
+        print(f"position vector of {self.name} with the coordinates {self.coordinates} got created successfully.")
+        all_vectors.append(Vector(f"position_vector_{name}", self.coordinates, "origin", self.name))
+
+
+
+
 
 
 def create_vector(name, x,y,z):
@@ -410,6 +418,17 @@ while True:
             mirror_point(plane, new_name, name)
         except:
             print("There has been a problem with your input.")
+
+
+    elif user_input.lower() == "position vector":
+        point = input("Name of the point: ")
+        try:
+            for element in all_points:
+                if element.name == point:
+                    element.position_vector()
+        except:
+            print("There has been a problem with your input.")
+
 
 
     elif user_input.lower() == "vector":
