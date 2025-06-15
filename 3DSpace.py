@@ -315,6 +315,7 @@ def help():
               "- all points                             gives info about all points\n"
               "- mirror point                           mirror a point on the given plane\n"
               "                                         possible planes are o, x, y, z ,xy, xz ,yz, point\n"
+              "- position vector                        creates the position vector of the point\n"
               "\n"
               "\n"
 
