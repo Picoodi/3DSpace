@@ -71,9 +71,23 @@ class Point:
 
 
 
+def create_vector(name, x,y,z):
+    #just putting the input into the right list format
+    list_of_coordinates = [[x],
+                           [y],
+                           [z]]
+
+    #we create a point that is the tip of the vector
+    all_points.append((Point(f"tip_of_{name}", list_of_coordinates)))
+
+    # creating a successful message and creating the vector object and adding it to the all_vectors list
+    print(f"Vector {name} with the coordinates {list_of_coordinates} got created successfully.")
+    all_vectors.append(Vector(name, list_of_coordinates, "origin" , f"tip_of_{name}" ))
+
+
 
 # creates a vector with two given points
-def create_vector(name, pointA, pointB):
+def create_vector_with_points(name, pointA, pointB):
 
     pointA_exists = False
     pointB_exists = False
@@ -298,6 +312,7 @@ def help():
 
               "VECTORS \n"
               "- vector                                 create a new vector \n"
+              "- vector points                          create a vector with 2 points \n"
               "- delete vector                          deletes a specific vector\n"
               "- show vector                            gives info about a specific vector\n"
               "- all vectors                            gives info about all vectors\n"
@@ -323,6 +338,8 @@ def help():
 #the objects the user needs
 all_points = []
 all_vectors = []
+#the origin point is already defined. Important for creating vectors
+all_points.append(Point("origin", [[0],[0],[0]]))
 
 
 #Saying hello to the user
@@ -335,6 +352,7 @@ print("Hello there. If you need help with the programm just type help \n"
       "     +------ y\n"
       "    /\n"
       "   x\n"
+      "And the point (0/0/0) is already defined with the name origin"
       )
 
 #Having the while loop as the start
@@ -396,10 +414,21 @@ while True:
 
     elif user_input.lower() == "vector":
         try:
+            name = input("name = ")
+            x = float(input("x = "))
+            y = float(input("y = "))
+            z = float(input("z = "))
+            create_vector(name, x, y, z)
+        except:
+            print("There has been a problem with your input.")
+
+
+    elif user_input.lower() == "vector points":
+        try:
             name = input("Name of the vector: ")
             pointA = input("Starting Point: ")
             pointB = input("End Point: ")
-            create_vector(name, pointA, pointB)
+            create_vector_with_points(name, pointA, pointB)
         except:
             print("There has been a problem with your input.")
 
