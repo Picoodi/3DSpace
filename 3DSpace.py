@@ -7,12 +7,13 @@
 # The coordinates are shown in [[x],[y],[z]] because with this matrix multiplication
 # can be implemented easily as well.
 
-#the necessary libraries for the project
+# the necessary libraries for the project
 from math import sqrt
 
-#little TO DO for me
-#let the user rename vectors and points
-#create the polar coordinates of a point
+
+# little TO DO for me
+# let the user rename vectors and points
+# create the polar coordinates of a point
 
 
 # The vector is one of the basic building blocks of geometry
@@ -20,15 +21,15 @@ class Vector:
     # We need all those parameters for mathematics or finding and working with the object
     def __init__(self, name, vector_coordinates, pointA, pointB):
         self.name = name
-        self.coordinates = vector_coordinates #Vektior = (x,y,z) as a matrix of course
-        self.x =  vector_coordinates[0][0]
+        self.coordinates = vector_coordinates  # Vektior = (x,y,z) as a matrix of course
+        self.x = vector_coordinates[0][0]
         self.y = vector_coordinates[1][0]
         self.z = vector_coordinates[2][0]
         self.PointA = pointA
         self.PointB = pointB
 
-    #This function prints all the information about the vector
-    def info (self):
+    # This function prints all the information about the vector
+    def info(self):
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
         print(f"Points: {self.PointA} and {self.PointB}")
@@ -39,11 +40,11 @@ class Vector:
 
     # returns the magnitude of the vector calculated with the 3D Pythagoras
     def magnitude(self):
-        return sqrt(self.x**2 + self.y**2 + self.z**2)
+        return sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
 
     # Lets you multiply the vector with a number aka scalar, the new values are stored
     def scalar_multiplication(self, scalar):
-        self.coordinates = [[self.x * scalar],[self.y * scalar],[self.z * scalar]]
+        self.coordinates = [[self.x * scalar], [self.y * scalar], [self.z * scalar]]
         self.x *= scalar
         self.y *= scalar
         self.z *= scalar
@@ -51,12 +52,9 @@ class Vector:
     # creates a new Vector which is the negative vector of the given object
     def negative(self):
         new_name = input("Name of the negative: ")
-        new_coordinates = [[self.x * -1],[self.y * -1],[self.z * -1]]
+        new_coordinates = [[self.x * -1], [self.y * -1], [self.z * -1]]
         print(f"Vector {new_name} with coordinates {new_coordinates} got created successfully.")
         all_vectors.append(Vector(new_name, new_coordinates, self.PointB, self.PointA))
-
-
-
 
 
 # The Point in a 3D Space P = (x,y,z)
@@ -70,7 +68,7 @@ class Point:
         self.z = list_of_coordinates[2][0]
 
     # This function prints all the information about the point
-    def info (self):
+    def info(self):
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
 
@@ -83,28 +81,22 @@ class Point:
         all_vectors.append(Vector(f"position_vector_{name}", self.coordinates, "origin", self.name))
 
 
-
-
-
-
-def create_vector(name, x,y,z):
-    #just putting the input into the right list format
+def create_vector(name, x, y, z):
+    # just putting the input into the right list format
     list_of_coordinates = [[x],
                            [y],
                            [z]]
 
-    #we create a point that is the tip of the vector
+    # we create a point that is the tip of the vector
     all_points.append((Point(f"tip_of_{name}", list_of_coordinates)))
 
     # creating a successful message and creating the vector object and adding it to the all_vectors list
     print(f"Vector {name} with the coordinates {list_of_coordinates} got created successfully.")
-    all_vectors.append(Vector(name, list_of_coordinates, "origin" , f"tip_of_{name}" ))
-
+    all_vectors.append(Vector(name, list_of_coordinates, "origin", f"tip_of_{name}"))
 
 
 # creates a vector with two given points
 def create_vector_with_points(name, pointA, pointB):
-
     pointA_exists = False
     pointB_exists = False
     pointA_coordinates = []
@@ -121,15 +113,14 @@ def create_vector_with_points(name, pointA, pointB):
             pointB_coordinates = element.coordinates
             pointB_exists = True
 
-
-    if pointA_exists and pointB_exists == True: #if the points don't exist we give back a fail
-        #creaing the mathematical vector
+    if pointA_exists and pointB_exists == True:  # if the points don't exist we give back a fail
+        # creaing the mathematical vector
         vector_coordinates = [[pointB_coordinates[0][0] - pointA_coordinates[0][0]],
                               [pointB_coordinates[1][0] - pointA_coordinates[1][0]],
                               [pointB_coordinates[2][0] - pointA_coordinates[2][0]]
                               ]
 
-        #creating a successful message and creating the vector object and adding it to the all_vectors list
+        # creating a successful message and creating the vector object and adding it to the all_vectors list
         print(f"Vector {name} with coordinates {vector_coordinates} got created successfully.")
         all_vectors.append(Vector(name, vector_coordinates, pointA, pointB))
 
@@ -138,11 +129,8 @@ def create_vector_with_points(name, pointA, pointB):
         print("sry there has been a problem with your points")
 
 
-
-
-
-def create_point(name, x,y,z):
-    #just putting the input into the right list format
+def create_point(name, x, y, z):
+    # just putting the input into the right list format
     list_of_coordinates = [[x],
                            [y],
                            [z]]
@@ -150,8 +138,6 @@ def create_point(name, x,y,z):
     # creating a successful message and creating the point object and adding it to the all_points list
     print(f"Point {name} with the coordinates {list_of_coordinates} got created successfully.")
     all_points.append(Point(name, list_of_coordinates))
-
-
 
 
 # not jet finished the mirror function. Point and axis mirroring still need to be implemented
@@ -165,38 +151,37 @@ def mirror_point(plane, new_name, point_name):
         if element.name == point_name:
             list_of_coordinates = element.coordinates
 
-
     # we check which plane it is and change the coordinates accordingly
-    if plane == "o": #Every coordinate times -1
-        new_coordinates = [[list_of_coordinates[0][0] *-1],
-                           [list_of_coordinates[1][0] *-1],
-                           [list_of_coordinates[2][0] *-1]]
+    if plane == "o":  # Every coordinate times -1
+        new_coordinates = [[list_of_coordinates[0][0] * -1],
+                           [list_of_coordinates[1][0] * -1],
+                           [list_of_coordinates[2][0] * -1]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "xy": #the z coordinate times -1
+    elif plane == "xy":  # the z coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0]],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0] * -1]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "xz": #the y coordinate times -1
+    elif plane == "xz":  # the y coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0]],
                            [list_of_coordinates[1][0] * -1],
-                           [list_of_coordinates[2][0] ]]
+                           [list_of_coordinates[2][0]]]
         new_point = Point(new_name, new_coordinates)
 
-    elif plane == "yz": #the x coordinate times -1
+    elif plane == "yz":  # the x coordinate times -1
         new_coordinates = [[list_of_coordinates[0][0] * -1],
                            [list_of_coordinates[1][0]],
                            [list_of_coordinates[2][0]]]
         new_point = Point(new_name, new_coordinates)
 
 
-    #For the next planes, geometrically we create a vector to the point we want
-    #to mirror through. We double its magnitude and calculate the new_coordinates
-    #of the new point with the original point plus the vector.
+    # For the next planes, geometrically we create a vector to the point we want
+    # to mirror through. We double its magnitude and calculate the new_coordinates
+    # of the new point with the original point plus the vector.
 
-    elif plane == "x": #Point on x-Axis is (x from point /0/0)
+    elif plane == "x":  # Point on x-Axis is (x from point /0/0)
         mirror_vector_coordinates = [[2 * (list_of_coordinates[0][0] - list_of_coordinates[0][0])],
                                      [2 * (0 - list_of_coordinates[1][0])],
                                      [2 * (0 - list_of_coordinates[2][0])]
@@ -210,7 +195,7 @@ def mirror_point(plane, new_name, point_name):
         new_point = Point(new_name, new_coordinates)
 
 
-    elif plane == "y": #Point on x-Axis is (0/y from point /0)
+    elif plane == "y":  # Point on x-Axis is (0/y from point /0)
         mirror_vector_coordinates = [[2 * (0 - list_of_coordinates[0][0])],
                                      [2 * (list_of_coordinates[1][0] - list_of_coordinates[1][0])],
                                      [2 * (0 - list_of_coordinates[2][0])]
@@ -224,7 +209,7 @@ def mirror_point(plane, new_name, point_name):
         new_point = Point(new_name, new_coordinates)
 
 
-    elif plane == "z": #Point on x-Axis is (0/0/z from point)
+    elif plane == "z":  # Point on x-Axis is (0/0/z from point)
         mirror_vector_coordinates = [[2 * (0 - list_of_coordinates[0][0])],
                                      [2 * (0 - list_of_coordinates[1][0])],
                                      [2 * (list_of_coordinates[2][0] - list_of_coordinates[2][0])]
@@ -239,16 +224,16 @@ def mirror_point(plane, new_name, point_name):
 
 
 
-    elif plane == "point": #Here we create the vetor between the two points, double and create the new point
+    elif plane == "point":  # Here we create the vetor between the two points, double and create the new point
         mirror_point = input("Mirror point: ")
         mirror_point_coordinates = []
         for element in all_points:
             if element.name == mirror_point:
                 mirror_point_coordinates = element.coordinates
 
-        mirror_vector_coordinates = [[ 2*( mirror_point_coordinates[0][0] - list_of_coordinates[0][0]) ],
-                                     [ 2*( mirror_point_coordinates[1][0] - list_of_coordinates[1][0]) ],
-                                     [ 2*( mirror_point_coordinates[2][0] - list_of_coordinates[2][0]) ]
+        mirror_vector_coordinates = [[2 * (mirror_point_coordinates[0][0] - list_of_coordinates[0][0])],
+                                     [2 * (mirror_point_coordinates[1][0] - list_of_coordinates[1][0])],
+                                     [2 * (mirror_point_coordinates[2][0] - list_of_coordinates[2][0])]
                                      ]
 
         new_coordinates = [[list_of_coordinates[0][0] + mirror_vector_coordinates[0][0]],
@@ -260,39 +245,37 @@ def mirror_point(plane, new_name, point_name):
         new_point = Point(new_name, new_coordinates)
 
 
-    #If the input of the plane ist not right we give that back to the user and break the function with None return
+    # If the input of the plane ist not right we give that back to the user and break the function with None return
     else:
         print("Sry your plane to mirror is not defined. See the help page for more infos.")
         return None
 
-    #If everything worked we create a new Point object and add it to all_points list
+    # If everything worked we create a new Point object and add it to all_points list
     print(f"Point {new_name} with the coordinates {new_coordinates} got created successfully.")
     all_points.append(new_point)
 
 
-
-
 def add_vectors(VectorA, VectorB, new_name):
-    #we take two vectors and try to add them together
+    # we take two vectors and try to add them together
     try:
-         new_coordinates =[[VectorA.x + VectorB.x],
+        new_coordinates = [[VectorA.x + VectorB.x],
                            [VectorA.y + VectorB.y],
                            [VectorA.z + VectorB.z]]
 
-         all_vectors.append(Vector(new_name, new_coordinates, None, None))
-         print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
+        all_vectors.append(Vector(new_name, new_coordinates, None, None))
+        print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
 
 
-    #if something went wrong we tell it the user
+    # if something went wrong we tell it the user
     except:
         print("There has been a problem with the Vectors of yours.")
 
 
 def subtract_vectors(VectorA, VectorB, new_name):
     try:
-        new_coordinates = [[VectorA.x - VectorB.x ],
-                           [VectorA.y - VectorB.y ],
-                           [VectorA.z - VectorB.z ]]
+        new_coordinates = [[VectorA.x - VectorB.x],
+                           [VectorA.y - VectorB.y],
+                           [VectorA.z - VectorB.z]]
 
         all_vectors.append(Vector(new_name, new_coordinates, None, None))
         print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
@@ -301,66 +284,63 @@ def subtract_vectors(VectorA, VectorB, new_name):
         print("There has been a problem with the Vectors of yours.")
 
 
-
 # The help page shows every command and an explanation for each one
 def help():
-        print(" \n"
-              " \n"
-              "Hello Welcome to the help menu \n"
-              "\n"
-              "\n"
-              
-              "BASIC COMMANDS \n"
-              "- exit                                   exit the programm\n"
-              "- help                                   open this help menu\n"          
-              "\n"
-              "\n"
+    print(" \n"
+          " \n"
+          "Hello Welcome to the help menu \n"
+          "\n"
+          "\n"
 
-              "POINTS \n"
-              "- point                                  create a new point\n"
-              "- delete point                           deletes a specific point\n"
-              "- show point                             gives info about a specific point\n"  
-              "- all points                             gives info about all points\n"
-              "- mirror point                           mirror a point on the given plane\n"
-              "                                         possible planes are o, x, y, z ,xy, xz ,yz, point\n"
-              "- position vector                        creates the position vector of the point\n"
-              "\n"
-              "\n"
+          "BASIC COMMANDS \n"
+          "- exit                                   exit the programm\n"
+          "- help                                   open this help menu\n"
+          "\n"
+          "\n"
 
-              "VECTORS \n"
-              "- vector                                 create a new vector \n"
-              "- vector points                          create a vector with 2 points \n"
-              "- delete vector                          deletes a specific vector\n"
-              "- show vector                            gives info about a specific vector\n"
-              "- all vectors                            gives info about all vectors\n"
-              "- magnitude vector                       magnitude of a specific vector\n"
-              "- add vectors                            add two given vectors\n"
-              "- subtract vectors                       subtract two given vectors\n"
-              "- negative vector                        creates the negative vector of the given one\n"
-              "- multiply vector                        skalar multiplication of 1 vector\n"
-              "\n"
-              "\n"
+          "POINTS \n"
+          "- point                                  create a new point\n"
+          "- delete point                           deletes a specific point\n"
+          "- show point                             gives info about a specific point\n"
+          "- rename point                           rename a point that already exists\n"
+          "- all points                             gives info about all points\n"
+          "- mirror point                           mirror a point on the given plane\n"
+          "                                         possible planes are o, x, y, z ,xy, xz ,yz, point\n"
+          "- position vector                        creates the position vector of the point\n"
+          "\n"
+          "\n"
 
-              )
+          "VECTORS \n"
+          "- vector                                 create a new vector \n"
+          "- vector points                          create a vector with 2 points \n"
+          "- delete vector                          deletes a specific vector\n"
+          "- show vector                            gives info about a specific vector\n"
+          "- rename vector                          rename a vector that already exists"
+          "- all vectors                            gives info about all vectors\n"
+          "- magnitude vector                       magnitude of a specific vector\n"
+          "- add vectors                            add two given vectors\n"
+          "- subtract vectors                       subtract two given vectors\n"
+          "- negative vector                        creates the negative vector of the given one\n"
+          "- multiply vector                        skalar multiplication of 1 vector\n"
+          "\n"
+          "\n"
 
-
-
+          )
 
 
 ####################START OF THE PROGRAMM########
 
-#Setup lists for the programm that are ESSENTIAL
-#We store every Object inside those lists
-#All Objects will have a name with which we will find
-#the objects the user needs
+# Setup lists for the programm that are ESSENTIAL
+# We store every Object inside those lists
+# All Objects will have a name with which we will find
+# the objects the user needs
 all_points = []
 all_vectors = []
-#the origin point is already defined. Important for creating vectors
-all_points.append(Point("origin", [[0],[0],[0]]))
+# the origin point is already defined. Important for creating vectors
+all_points.append(Point("origin", [[0], [0], [0]]))
 
-
-#Saying hello to the user
-#Explaining how the axis are named
+# Saying hello to the user
+# Explaining how the axis are named
 print("Hello there. If you need help with the programm just type help \n"
       "The coordinates are\n"
       "     z\n"
@@ -372,12 +352,12 @@ print("Hello there. If you need help with the programm just type help \n"
       "The point (0/0/0) is already defined with the name origin"
       )
 
-#Having the while loop as the start
+# Having the while loop as the start
 while True:
     user_input = input("> ")
 
-    #for the rest its always if statements which command the user typed
-    #and we use more input() functions to get the necessary information
+    # for the rest its always if statements which command the user typed
+    # and we use more input() functions to get the necessary information
     # to call the corresponding function
     # we also search the all_points and all_vectors lists to get information
 
@@ -533,7 +513,7 @@ while True:
 
 
     elif user_input.lower() == "negative vector":
-        name =  input("Name of the vector: ")
+        name = input("Name of the vector: ")
         for element in all_vectors:
             if element.name.strip().lower() == name.strip().lower():
                 element.negative()
