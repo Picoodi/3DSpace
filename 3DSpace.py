@@ -10,7 +10,9 @@
 #the necessary libraries for the project
 from math import sqrt
 
-
+#little TO DO for me
+#let the user rename vectors and points
+#create the polar coordinates of a point
 
 
 # The vector is one of the basic building blocks of geometry
@@ -31,6 +33,9 @@ class Vector:
         print(f"Coordinates: {self.coordinates}")
         print(f"Points: {self.PointA} and {self.PointB}")
         print(f"Magnitude of {self.magnitude()}")
+
+    def rename_vector(self, new_name):
+        self.name = new_name
 
     # returns the magnitude of the vector calculated with the 3D Pythagoras
     def magnitude(self):
@@ -68,6 +73,9 @@ class Point:
     def info (self):
         print(f"Name: {self.name}")
         print(f"Coordinates: {self.coordinates}")
+
+    def rename_point(self, new_name):
+        self.name = new_name
 
     def position_vector(self):
         # creating a successful message and creating the vector object and adding it to the all_vectors list
@@ -361,7 +369,7 @@ print("Hello there. If you need help with the programm just type help \n"
       "     +------ y\n"
       "    /\n"
       "   x\n"
-      "And the point (0/0/0) is already defined with the name origin"
+      "The point (0/0/0) is already defined with the name origin"
       )
 
 #Having the while loop as the start
@@ -404,6 +412,15 @@ while True:
             if element.name.lower() == name.lower():
                 all_points.remove(element)
                 print("successfully deleted")
+
+
+    elif user_input.lower() == "rename point":
+        name = input("Name of the point: ")
+        new_name = input("New name: ")
+        for element in all_points:
+            if element.name.lower() == name.lower():
+                element.rename_point(new_name)
+                print(f"successfully renamed too {new_name}")
 
 
     elif user_input.lower() == "all points":
@@ -471,6 +488,14 @@ while True:
             if element.name.strip().lower() == name.strip().lower():
                 all_vectors.remove(element)
                 print("successfully deleted")
+
+    elif user_input.lower() == "rename vector":
+        name = input("Name of the vector: ")
+        new_name = input("New name: ")
+        for element in all_vectors:
+            if element.name.lower() == name.lower():
+                element.rename_vector(new_name)
+                print(f"successfully renamed too {new_name}")
 
 
     elif user_input.lower() == "magnitude vector":
