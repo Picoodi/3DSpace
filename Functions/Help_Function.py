@@ -1,0 +1,42 @@
+# The help page shows every command and an explanation for each one
+def help():
+    print(" \n"
+          " \n"
+          "Hello Welcome to the help menu \n"
+          "\n"
+          "\n"
+
+          "BASIC COMMANDS \n"
+          "- exit                                   exit the programm\n"
+          "- help                                   open this help menu\n"
+          "\n"
+          "\n"
+
+          "POINTS \n"
+          "- point                                  create a new point\n"
+          "- delete point                           deletes a specific point\n"
+          "- show point                             gives info about a specific point\n"
+          "- rename point                           rename a point that already exists\n"
+          "- all points                             gives info about all points\n"
+          "- mirror point                           mirror a point on the given plane\n"
+          "                                         possible planes are o, x, y, z ,xy, xz ,yz, point\n"
+          "- position vector                        creates the position vector of the point\n"
+          "\n"
+          "\n"
+
+          "VECTORS \n"
+          "- vector                                 create a new vector \n"
+          "- vector points                          create a vector with 2 points \n"
+          "- delete vector                          deletes a specific vector\n"
+          "- show vector                            gives info about a specific vector\n"
+          "- rename vector                          rename a vector that already exists\n"
+          "- all vectors                            gives info about all vectors\n"
+          "- magnitude vector                       magnitude of a specific vector\n"
+          "- add vectors                            add two given vectors\n"
+          "- subtract vectors                       subtract two given vectors\n"
+          "- negative vector                        creates the negative vector of the given one\n"
+          "- multiply vector                        skalar multiplication of 1 vector\n"
+          "\n"
+          "\n"
+
+          )

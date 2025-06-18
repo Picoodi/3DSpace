@@ -1,0 +1,83 @@
+from Classes.Vector_Class import Vector
+from Classes.Point_Class import Point
+
+def create_vector(name, x, y, z):
+    # just putting the input into the right list format
+    list_of_coordinates = [[x],
+                           [y],
+                           [z]]
+
+    # we create a point that is the tip of the vector
+    VectorTip = Point(f"tip_of_{name}", list_of_coordinates)
+
+    # creating a successful message and creating the vector object and adding it to the all_vectors list
+    print(f"Vector {name} with the coordinates {list_of_coordinates} got created successfully.")
+    return Vector(name, list_of_coordinates, "origin", f"tip_of_{name}") , VectorTip
+
+
+
+
+
+# creates a vector with two given points
+def create_vector_with_points(name, pointA, pointB, all_points):
+    pointA_exists = False
+    pointB_exists = False
+    pointA_coordinates = []
+    pointB_coordinates = []
+
+    # we go through the list all_points to get the coordinates
+    # of the given points
+    for element in all_points:
+        if element.name == pointA:
+            pointA_coordinates = element.coordinates
+            pointA_exists = True
+
+        if element.name == pointB:
+            pointB_coordinates = element.coordinates
+            pointB_exists = True
+
+    if pointA_exists and pointB_exists == True:  # if the points don't exist we give back a fail
+        # creaing the mathematical vector
+        vector_coordinates = [[pointB_coordinates[0][0] - pointA_coordinates[0][0]],
+                              [pointB_coordinates[1][0] - pointA_coordinates[1][0]],
+                              [pointB_coordinates[2][0] - pointA_coordinates[2][0]]
+                              ]
+
+        # creating a successful message and creating the vector object and adding it to the all_vectors list
+        print(f"Vector {name} with coordinates {vector_coordinates} got created successfully.")
+        return Vector(name, vector_coordinates, pointA, pointB)
+
+
+    else:
+        print("sry there has been a problem with your points")
+
+
+
+
+def add_vectors(VectorA, VectorB, new_name):
+    # we take two vectors and try to add them together
+    new_coordinates = [[VectorA.x + VectorB.x],
+                       [VectorA.y + VectorB.y],
+                       [VectorA.z + VectorB.z]]
+
+    print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
+    return Vector(new_name, new_coordinates, None, None)
+
+
+
+
+
+
+
+
+def subtract_vectors(VectorA, VectorB, new_name):
+    try:
+        new_coordinates = [[VectorA.x - VectorB.x],
+                           [VectorA.y - VectorB.y],
+                           [VectorA.z - VectorB.z]]
+
+        print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
+        return Vector(new_name, new_coordinates, None, None)
+
+    except:
+        print("There has been a problem with the Vectors of yours.")
