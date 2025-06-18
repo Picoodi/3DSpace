@@ -8,7 +8,7 @@
 # can be implemented easily as well.
 
 # the necessary libraries for the project
-from math import sqrt
+from math import sqrt, sin, cos, tan, asin, acos, atan
 
 
 # little TO DO for me
