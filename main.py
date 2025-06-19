@@ -7,7 +7,10 @@
 # The coordinates are shown in [[x],[y],[z]] because with this matrix multiplication
 # can be implemented easily as well.
 
-# the necessary libraries for the project
+#So far the programm lacks with updating infos like the points the vector originally got created on.
+#There will be patches for that in the future.
+
+# the necessary libraries for the project and also the functions from this project in other files
 from Functions.Help_Function import help
 
 from Functions.Point_Functions import *
@@ -149,8 +152,10 @@ if __name__ == '__main__':
 
         elif user_input.lower() == "all vectors":
             for element in all_vectors:
-                print(element.name, element.coordinates)
-
+                try:
+                    print(element.name, element.coordinates)
+                except:
+                    print("Problem with this element")
 
         elif user_input.lower() == "delete vector":
             name = input("Name of the vector: ")
@@ -162,10 +167,13 @@ if __name__ == '__main__':
         elif user_input.lower() == "rename vector":
             name = input("Name of the vector: ")
             new_name = input("New name: ")
-            for element in all_vectors:
-                if element.name.lower() == name.lower():
-                    element.rename_vector(new_name)
-                    print(f"successfully renamed too {new_name}")
+            try:
+                for element in all_vectors:
+                    if element.name.lower() == name.lower():
+                        element.rename_vector(new_name)
+                        print(f"successfully renamed too {new_name}")
+            except:
+                print("There has been a problem with your vector")
 
 
         elif user_input.lower() == "magnitude vector":
