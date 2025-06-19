@@ -36,6 +36,7 @@ def help():
           "- subtract vectors                       subtract two given vectors\n"
           "- negative vector                        creates the negative vector of the given one\n"
           "- multiply vector                        skalar multiplication of 1 vector\n"
+          "- scalar product                         calculates the scalar and angle of two vectors\n"
           "\n"
           "\n"
 

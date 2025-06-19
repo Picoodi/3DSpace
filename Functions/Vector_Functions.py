@@ -1,6 +1,9 @@
 from Classes.Vector_Class import Vector
 from Classes.Point_Class import Point
 
+from math import acos, degrees
+
+
 def create_vector(name, x, y, z):
     # just putting the input into the right list format
     list_of_coordinates = [[x],
@@ -81,3 +84,19 @@ def subtract_vectors(VectorA, VectorB, new_name):
 
     except:
         print("There has been a problem with the Vectors of yours.")
+
+
+
+
+
+
+
+def scalar_product(vector1, vector2):
+    scalar = vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z
+    angle_radian = acos(scalar / (vector1.magnitude() * vector2.magnitude()))
+    angle_degrees = degrees(angle_radian)
+    if scalar == 0:
+        print("The vectors are orthogonal which means a 90 degree angle.")
+
+    else:
+        print(f"The vectors have a scalar of {scalar} and an angle of {angle_radian} radian or {angle_degrees} degrees")

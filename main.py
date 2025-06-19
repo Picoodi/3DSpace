@@ -8,8 +8,6 @@
 # can be implemented easily as well.
 
 # the necessary libraries for the project
-from math import sqrt, sin, cos, tan, asin, acos, atan
-
 from Functions.Help_Function import help
 
 from Functions.Point_Functions import *
@@ -41,187 +39,207 @@ print("Hello there. If you need help with the programm just type help \n"
       )
 
 # Having the while loop as the start
-while True:
-    user_input = input("> ")
+if __name__ == '__main__':
+    while True:
 
-    # for the rest its always if statements which command the user typed
-    # and we use more input() functions to get the necessary information
-    # to call the corresponding function
-    # we also search the all_points and all_vectors lists to get information
+        user_input = input("> ")
 
-    if user_input.lower() == "exit":
-        exit()
+        # for the rest its always if statements which command the user typed
+        # and we use more input() functions to get the necessary information
+        # to call the corresponding function
+        # we also search the all_points and all_vectors lists to get information
 
-    elif user_input.lower() == "help":
-        help()
+        if user_input.lower() == "exit":
+            exit()
 
-
-    elif user_input.lower() == "point":
-        try:
-            name = input("name = ")
-            x = float(input("x = "))
-            y = float(input("y = "))
-            z = float(input("z = "))
-            all_points.append(create_point(name, x, y, z))
-        except:
-            print("There has been a problem with your input.")
+        elif user_input.lower() == "help":
+            help()
 
 
-    elif user_input.lower() == "show point":
-        name = input("Name of the point: ")
-        for element in all_points:
-            if element.name.lower() == name.lower():
-                element.info()
+        elif user_input.lower() == "point":
+            try:
+                name = input("name = ")
+                x = float(input("x = "))
+                y = float(input("y = "))
+                z = float(input("z = "))
+                all_points.append(create_point(name, x, y, z))
+            except:
+                print("There has been a problem with your input.")
 
 
-    elif user_input.lower() == "delete point":
-        name = input("Name of the point: ")
-        for element in all_points:
-            if element.name.lower() == name.lower():
-                all_points.remove(element)
-                print("successfully deleted")
-
-
-    elif user_input.lower() == "rename point":
-        name = input("Name of the point: ")
-        new_name = input("New name: ")
-        for element in all_points:
-            if element.name.lower() == name.lower():
-                element.rename_point(new_name)
-                print(f"successfully renamed too {new_name}")
-
-
-    elif user_input.lower() == "all points":
-        for element in all_points:
-            print(element.name, element.coordinates)
-
-
-    elif user_input.lower() == "mirror point":
-        plane = input("With which plane / point / axis wo mirror: ")
-        new_name = input("Name of the new point: ")
-        name = input("Which point you want to mirror: ")
-        try:
-            all_points.append(mirror_point(plane, new_name, name, all_points))
-        except:
-            print("There has been a problem with your input.")
-
-
-    elif user_input.lower() == "position vector":
-        point_name = input("Name of the point: ")
-        try:
+        elif user_input.lower() == "show point":
+            name = input("Name of the point: ")
             for element in all_points:
-                if element.name == point_name:
-                    all_vectors.append(element.position_vector(point_name))
-        except:
-            print("There has been a problem with your input.")
+                if element.name.lower() == name.lower():
+                    element.info()
+
+
+        elif user_input.lower() == "delete point":
+            name = input("Name of the point: ")
+            for element in all_points:
+                if element.name.lower() == name.lower():
+                    all_points.remove(element)
+                    print("successfully deleted")
+
+
+        elif user_input.lower() == "rename point":
+            name = input("Name of the point: ")
+            new_name = input("New name: ")
+            for element in all_points:
+                if element.name.lower() == name.lower():
+                    element.rename_point(new_name)
+                    print(f"successfully renamed too {new_name}")
+
+
+        elif user_input.lower() == "all points":
+            for element in all_points:
+                print(element.name, element.coordinates)
+
+
+        elif user_input.lower() == "mirror point":
+            plane = input("With which plane / point / axis wo mirror: ")
+            new_name = input("Name of the new point: ")
+            name = input("Which point you want to mirror: ")
+            try:
+                all_points.append(mirror_point(plane, new_name, name, all_points))
+            except:
+                print("There has been a problem with your input.")
+
+
+        elif user_input.lower() == "position vector":
+            point_name = input("Name of the point: ")
+            try:
+                for element in all_points:
+                    if element.name == point_name:
+                        all_vectors.append(element.position_vector(point_name))
+            except:
+                print("There has been a problem with your input.")
 
 
 
-    elif user_input.lower() == "vector":
-        try:
-            name = input("name = ")
-            x = float(input("x = "))
-            y = float(input("y = "))
-            z = float(input("z = "))
-            Vector, VectorTip = create_vector(name, x, y, z)
-            all_vectors.append(Vector)
-            all_points.append(VectorTip)
-        except:
-            print("There has been a problem with your input.")
+        elif user_input.lower() == "vector":
+            try:
+                name = input("name = ")
+                x = float(input("x = "))
+                y = float(input("y = "))
+                z = float(input("z = "))
+                Vector, VectorTip = create_vector(name, x, y, z)
+                all_vectors.append(Vector)
+                all_points.append(VectorTip)
+            except:
+                print("There has been a problem with your input.")
 
 
-    elif user_input.lower() == "vector points":
-        try:
+        elif user_input.lower() == "vector points":
+            try:
+                name = input("Name of the vector: ")
+                pointA = input("Starting Point: ")
+                pointB = input("End Point: ")
+                all_vectors.append(create_vector_with_points(name, pointA, pointB, all_points))
+            except:
+                print("There has been a problem with your input.")
+
+
+        elif user_input.lower() == "show vector":
             name = input("Name of the vector: ")
-            pointA = input("Starting Point: ")
-            pointB = input("End Point: ")
-            all_vectors.append(create_vector_with_points(name, pointA, pointB, all_points))
-        except:
-            print("There has been a problem with your input.")
-
-
-    elif user_input.lower() == "show vector":
-        name = input("Name of the vector: ")
-        for element in all_vectors:
-            if element.name.strip().lower() == name.strip().lower():
-                element.info()
-
-
-    elif user_input.lower() == "all vectors":
-        for element in all_vectors:
-            print(element.name, element.coordinates)
-
-
-    elif user_input.lower() == "delete vector":
-        name = input("Name of the vector: ")
-        for element in all_vectors:
-            if element.name.strip().lower() == name.strip().lower():
-                all_vectors.remove(element)
-                print("successfully deleted")
-
-    elif user_input.lower() == "rename vector":
-        name = input("Name of the vector: ")
-        new_name = input("New name: ")
-        for element in all_vectors:
-            if element.name.lower() == name.lower():
-                element.rename_vector(new_name)
-                print(f"successfully renamed too {new_name}")
-
-
-    elif user_input.lower() == "magnitude vector":
-        name = input("Name of the vector: ")
-        for element in all_vectors:
-            if element.name.strip().lower() == name.strip().lower():
-                print(element.magnitude())
-
-
-    elif user_input.lower() == "add vectors":
-        new_name = input("New vector name: ")
-        VectorA = input("First vector: ")
-        VectorB = input("Second vector: ")
-
-        try:
             for element in all_vectors:
-                if element.name == VectorA:
-                    VectorA = element
-                if element.name == VectorB:
-                    VectorB = element
-
-            all_vectors.append(add_vectors(VectorA, VectorB, new_name))
-
-        except:
-            print("There has been a problem with the Vectors of yours.")
+                if element.name.strip().lower() == name.strip().lower():
+                    element.info()
 
 
-    elif user_input.lower() == "subtract vectors":
-        new_name = input("New vector name: ")
-        VectorA = input("First vector: ")
-        VectorB = input("Second vector: ")
-
-        try:
+        elif user_input.lower() == "all vectors":
             for element in all_vectors:
-                if element.name == VectorA:
-                    VectorA = element
-                if element.name == VectorB:
-                    VectorB = element
-
-            all_vectors.append(subtract_vectors(VectorA, VectorB, new_name))
-
-        except:
-            print("There has been a problem with the Vectors of yours.")
+                print(element.name, element.coordinates)
 
 
+        elif user_input.lower() == "delete vector":
+            name = input("Name of the vector: ")
+            for element in all_vectors:
+                if element.name.strip().lower() == name.strip().lower():
+                    all_vectors.remove(element)
+                    print("successfully deleted")
 
-    elif user_input.lower() == "negative vector":
-        name = input("Name of the vector: ")
-        for element in all_vectors:
-            if element.name.strip().lower() == name.strip().lower():
-                all_vectors.append(element.negative())
+        elif user_input.lower() == "rename vector":
+            name = input("Name of the vector: ")
+            new_name = input("New name: ")
+            for element in all_vectors:
+                if element.name.lower() == name.lower():
+                    element.rename_vector(new_name)
+                    print(f"successfully renamed too {new_name}")
 
 
-    elif user_input.lower() == "multiply vector":
-        vector = input("vector name: ")
-        number = float(input("multiplied by: "))
-        for element in all_vectors:
-            if element.name == vector:
-                element.scalar_multiplication(number)
+        elif user_input.lower() == "magnitude vector":
+            name = input("Name of the vector: ")
+            for element in all_vectors:
+                if element.name.strip().lower() == name.strip().lower():
+                    print(element.magnitude())
+
+
+        elif user_input.lower() == "add vectors":
+            new_name = input("New vector name: ")
+            VectorA = input("First vector: ")
+            VectorB = input("Second vector: ")
+
+            try:
+                for element in all_vectors:
+                    if element.name == VectorA:
+                        VectorA = element
+                    if element.name == VectorB:
+                        VectorB = element
+
+                all_vectors.append(add_vectors(VectorA, VectorB, new_name))
+
+            except:
+                print("There has been a problem with the Vectors of yours.")
+
+
+        elif user_input.lower() == "subtract vectors":
+            new_name = input("New vector name: ")
+            VectorA = input("First vector: ")
+            VectorB = input("Second vector: ")
+
+            try:
+                for element in all_vectors:
+                    if element.name == VectorA:
+                        VectorA = element
+                    if element.name == VectorB:
+                        VectorB = element
+
+                all_vectors.append(subtract_vectors(VectorA, VectorB, new_name))
+
+            except:
+                print("There has been a problem with the Vectors of yours.")
+
+
+
+        elif user_input.lower() == "negative vector":
+            name = input("Name of the vector: ")
+            for element in all_vectors:
+                if element.name.strip().lower() == name.strip().lower():
+                    all_vectors.append(element.negative())
+
+
+        elif user_input.lower() == "multiply vector":
+            vector = input("vector name: ")
+            number = float(input("multiplied by: "))
+            for element in all_vectors:
+                if element.name == vector:
+                    element.scalar_multiplication(number)
+
+
+        elif user_input.lower() == "scalar product":
+            vector1 = input("First vector: ")
+            vector2 = input("Second vector: ")
+
+            for element in all_vectors:
+                if element.name == vector1:
+                    vector1 = element
+
+                elif element.name == vector2:
+                    vector2 = element
+
+            try:
+                scalar_product(vector1, vector2)
+
+            except:
+                print("There has been an error with your vectors")
