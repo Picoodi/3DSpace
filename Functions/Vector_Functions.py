@@ -90,11 +90,12 @@ def subtract_vectors(VectorA, VectorB, new_name):
 
 
 
-
+#function for calculating the scalar porduct and the angles between two vectors
 def scalar_product(vector1, vector2):
-    scalar = vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z
-    angle_radian = acos(scalar / (vector1.magnitude() * vector2.magnitude()))
-    angle_degrees = degrees(angle_radian)
+    scalar = vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z #scalar through the coordinates
+    angle_radian = acos(scalar / (vector1.magnitude() * vector2.magnitude())) #formula for the angle
+    angle_degrees = degrees(angle_radian) #acos above gives back the radian, here we calculate it to degrees
+
     if scalar == 0:
         print("The vectors are orthogonal which means a 90 degree angle.")
 
