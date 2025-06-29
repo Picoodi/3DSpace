@@ -13,8 +13,7 @@ def create_vector(name, x, y, z):
     # we create a point that is the tip of the vector
     VectorTip = Point(f"tip_of_{name}", list_of_coordinates)
 
-    # creating a successful message and creating the vector object and adding it to the all_vectors list
-    print(f"Vector {name} with the coordinates {list_of_coordinates} got created successfully.")
+    #creating the vector object
     return Vector(name, list_of_coordinates, "origin", f"tip_of_{name}") , VectorTip
 
 
@@ -40,14 +39,13 @@ def create_vector_with_points(name, pointA, pointB, all_points):
             pointB_exists = True
 
     if pointA_exists and pointB_exists == True:  # if the points don't exist we give back a fail
-        # creaing the mathematical vector
+        # creating the mathematical vector
         vector_coordinates = [[pointB_coordinates[0][0] - pointA_coordinates[0][0]],
                               [pointB_coordinates[1][0] - pointA_coordinates[1][0]],
                               [pointB_coordinates[2][0] - pointA_coordinates[2][0]]
                               ]
 
-        # creating a successful message and creating the vector object and adding it to the all_vectors list
-        print(f"Vector {name} with coordinates {vector_coordinates} got created successfully.")
+        # creating the vector object
         return Vector(name, vector_coordinates, pointA, pointB)
 
 
@@ -63,7 +61,6 @@ def add_vectors(VectorA, VectorB, new_name):
                        [VectorA.y + VectorB.y],
                        [VectorA.z + VectorB.z]]
 
-    print(f"Vector {new_name} with the coordinates {new_coordinates} got created successfully.")
     return Vector(new_name, new_coordinates, None, None)
 
 
@@ -101,3 +98,4 @@ def scalar_product(vector1, vector2):
 
     else:
         print(f"The vectors have a scalar of {scalar} and an angle of {angle_radian} radian or {angle_degrees} degrees")
+

@@ -8,6 +8,7 @@ def help():
 
           "BASIC COMMANDS \n"
           "- exit                                   exit the programm\n"
+          "- reset                                  reset all points and vectors\n"
           "- help                                   open this help menu\n"
           "\n"
           "\n"

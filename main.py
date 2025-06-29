@@ -55,6 +55,11 @@ if __name__ == '__main__':
         if user_input.lower() == "exit":
             exit()
 
+        elif user_input.lower() == "reset": #just resetting to the start variables
+            all_points = []
+            all_vectors = []
+            all_points.append(Point("origin", [[0], [0], [0]]))
+
         elif user_input.lower() == "help":
             help()
 
@@ -115,6 +120,7 @@ if __name__ == '__main__':
                 for element in all_points:
                     if element.name == point_name:
                         all_vectors.append(element.position_vector(point_name))
+
             except:
                 print("There has been a problem with your input.")
 
@@ -171,7 +177,6 @@ if __name__ == '__main__':
                 for element in all_vectors:
                     if element.name.lower() == name.lower():
                         element.rename_vector(new_name)
-                        print(f"successfully renamed too {new_name}")
             except:
                 print("There has been a problem with your vector")
 
@@ -225,6 +230,7 @@ if __name__ == '__main__':
             for element in all_vectors:
                 if element.name.strip().lower() == name.strip().lower():
                     all_vectors.append(element.negative())
+
 
 
         elif user_input.lower() == "multiply vector":

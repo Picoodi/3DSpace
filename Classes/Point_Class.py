@@ -19,6 +19,7 @@ class Point:
         self.name = new_name
 
     def position_vector(self, name):
-        # creating a successful message and creating the vector object and adding it to the all_vectors list
-        print(f"position vector of {self.name} with the coordinates {self.coordinates} got created successfully.")
+        #creating the vector object with the same coordinates
         return Vector(f"position_vector_{name}", self.coordinates, "origin", self.name)
+
+

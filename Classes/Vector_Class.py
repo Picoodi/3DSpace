@@ -5,7 +5,7 @@ class Vector:
     # We need all those parameters for mathematics or finding and working with the object
     def __init__(self, name, vector_coordinates, pointA, pointB):
         self.name = name
-        self.coordinates = vector_coordinates  # Vektior = (x,y,z) as a matrix of course
+        self.coordinates = vector_coordinates  # Vektor = (x,y,z) as a matrix of course
         self.x = vector_coordinates[0][0]
         self.y = vector_coordinates[1][0]
         self.z = vector_coordinates[2][0]
@@ -37,5 +37,4 @@ class Vector:
     def negative(self):
         new_name = input("Name of the negative: ")
         new_coordinates = [[self.x * -1], [self.y * -1], [self.z * -1]]
-        print(f"Vector {new_name} with coordinates {new_coordinates} got created successfully.")
         return Vector(new_name, new_coordinates, self.PointB, self.PointA)

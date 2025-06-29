@@ -1,4 +1,6 @@
 from Classes.Point_Class import Point
+from Functions.Vector_Functions import add_vectors
+
 
 def create_point(name, x, y, z):
     # just putting the input into the right list format
@@ -6,8 +8,7 @@ def create_point(name, x, y, z):
                            [y],
                            [z]]
 
-    # creating a successful message and creating the point object and adding it to the all_points list
-    print(f"Point {name} with the coordinates {list_of_coordinates} got created successfully.")
+    # creating the point object
     return Point(name, list_of_coordinates)
 
 
@@ -123,6 +124,5 @@ def mirror_point(plane, new_name, point_name, list_of_all_points):
         print("Sry your plane to mirror is not defined. See the help page for more infos.")
         return None
 
-    # If everything worked we create a new Point object and add it to all_points list
-    print(f"Point {new_name} with the coordinates {new_coordinates} got created successfully.")
+    # If everything worked we create a new Point object
     return new_point
