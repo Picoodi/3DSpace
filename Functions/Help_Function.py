@@ -38,6 +38,7 @@ def help():
           "- negative vector                        creates the negative vector of the given one\n"
           "- multiply vector                        skalar multiplication of 1 vector\n"
           "- scalar product                         calculates the scalar and angle of two vectors\n"
+          "- cross product                          calculates the cross product of two vectors\n"
           "\n"
           "\n"
 

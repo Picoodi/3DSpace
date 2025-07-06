@@ -51,7 +51,8 @@ command_dict = {
     "subtract vectors": Commands.subtract_vectors,
     "negative vector": Commands.negative_vector,
     "multiply vector": Commands.multiply_vector,
-    "scalar product": Commands.scalar_product
+    "scalar product": Commands.scalar_product,
+    "cross product": Commands.cross_product
 }
 
 # Having the while loop as the start
@@ -65,3 +66,4 @@ if __name__ == '__main__':
         if user_input.lower() in command_dict:
             command = command_dict[user_input.lower()]
             command()
+

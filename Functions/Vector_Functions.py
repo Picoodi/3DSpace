@@ -99,3 +99,13 @@ def scalar_product(vector1, vector2):
     else:
         print(f"The vectors have a scalar of {scalar} and an angle of {angle_radian} radian or {angle_degrees} degrees")
 
+
+
+def cross_product(vectorA, vectorB, new_name):
+    new_vector = [
+        [vectorA.y * vectorB.z - vectorA.z * vectorB.y],
+        [vectorA.z * vectorB.x - vectorA.x * vectorB.z],
+        [vectorA.x * vectorB.y - vectorA.y * vectorB.x]
+    ]
+
+    return Vector(new_name, new_vector, None, None)

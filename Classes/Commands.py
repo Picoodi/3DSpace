@@ -211,4 +211,22 @@ class Commands:
             print("There has been an error with your vectors")
 
 
+    def cross_product(self):
+        new_name = input("New vector name: ")
+        vector1 = input("First vector: ")
+        vector2 = input("Second vector: ")
+
+
+        for element in all_vectors:
+            if element.name == vector1:
+                vector1 = element
+
+            elif element.name == vector2:
+                vector2 = element
+
+        try:
+            all_vectors.append(cross_product(vector1, vector2, new_name))
+
+        except:
+            print("There has been an error with your vectors")
 
